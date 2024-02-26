@@ -1,4 +1,3 @@
-import React from 'react';
 import CarouselItem from './componets/CarouselItem';
 import { Carousel } from 'react-responsive-carousel';
 import ProgramItems from './componets/ProgramItems';
