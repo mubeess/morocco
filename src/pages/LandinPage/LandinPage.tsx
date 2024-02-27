@@ -2,6 +2,8 @@ import CarouselItem from './componets/CarouselItem';
 import { Carousel } from 'react-responsive-carousel';
 import ProgramItems from './componets/ProgramItems';
 import { Button } from 'antd';
+import NumberCards from './componets/NumberCards';
+import Footer from './componets/Footer';
 export default function LandinPage() {
   const ITEMS = ['SLIDE', 'SLIDE2', 'SLIDE3'];
   return (
@@ -59,7 +61,7 @@ export default function LandinPage() {
           The programme is designed to be multi-sectoral with particular focus
           in some areas
         </p>
-        <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-32 mt-10">
+        <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems />
           <ProgramItems />
           <ProgramItems />
@@ -94,21 +96,28 @@ export default function LandinPage() {
       </div>
 
       {/* Space Booking */}
-      <div className="flex bg-silver h-52 justify-center flex-col md:flex-row md:justify-between my-10 items-center w-full px-5  md:px-20 gap-2 md:gap-10 lg:px-40">
+      <div className="flex bg-silver  min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40">
         <div className="gap-4">
-          <h1 className="text-2xl text-center">
-            Want an
-            <span className="text-lightGreen ml-1">Exhibition space?</span>
+          <h1 className="text-2xl font-bold">Want an</h1>
+          <h1 className="text-lightGreen text-2xl font-bold">
+            Exhibition space?
           </h1>
           <p className="text-center">
             We reached here with our hard work and dedication
           </p>
+          <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+            Book A Space
+          </Button>
         </div>
 
-        <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
-          Book A Space
-        </Button>
+        <div className="grid grid-cols-2 gap-10">
+          <NumberCards />
+          <NumberCards />
+          <NumberCards />
+          <NumberCards />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }

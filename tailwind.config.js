@@ -12,6 +12,7 @@ export default {
       colors: {
         lightGreen: '#4CAF4F',
         silver: '#F5F7FA',
+        lightBlack: '#263238',
       },
       height: {
         70: '70vh',
