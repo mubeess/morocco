@@ -14,14 +14,24 @@ export default function LandinPage() {
           <h1 className="text-xl md:text-2xl font-bold">
             🇳🇬 NIGERIA-MOROCCO 🇲🇦
           </h1>
-          <div className="hidden md:flex flex-items-center space-x-6">
-            <a href="/">Sample</a>
-            <a href="/">Sample</a>
-            <a href="/">Sample</a>
-            <a href="/">Sample</a>
+          <div className="hidden md:flex items-center space-x-10">
+            <a className="text-[12px]" href="/">
+              Home
+            </a>
+            <a className="text-[12px]" href="/">
+              Our Sponsors
+            </a>
+
+            <a className="text-[12px]" href="/">
+              Exhibitors
+            </a>
+            <Button className="bg-lightGreen w-[115px] h-[40px]   text-white">
+              Participate
+            </Button>
           </div>
         </div>
         <Carousel
+          swipeable={false}
           showStatus={false}
           stopOnHover={false}
           interval={4000}
@@ -39,8 +49,8 @@ export default function LandinPage() {
 
       {/* OUR PARTNERS */}
       <div className="flex flex-col items-center p-10">
-        <h1 className="text-2xl">Our Partners</h1>
-        <p className="my-5 text-center">
+        <h1 className="text-2xl text-fontColor font-[600]">Our Partners</h1>
+        <p className="my-5 text-center text-fontColor">
           We have been working with some biggest companies
         </p>
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
@@ -56,15 +66,29 @@ export default function LandinPage() {
       {/* OUR PROGRAMS */}
 
       <div className="flex flex-col items-center p-10">
-        <h1 className="text-2xl">Multi-sectoral Programme</h1>
-        <p className="my-5 text-center">
+        <h1 className="text-2xl text-fontColor font-[600]">
+          Multi-sectoral Programme
+        </h1>
+        <p className="my-5 text-center text-fontColor">
           The programme is designed to be multi-sectoral with particular focus
           in some areas
         </p>
         <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
-          <ProgramItems />
-          <ProgramItems />
-          <ProgramItems />
+          <ProgramItems
+            title="Automobile"
+            content="Our membership management software provides full automation of membership renewals and payments"
+            icon="Icon.png"
+          />
+          <ProgramItems
+            icon="energy.png"
+            title="Renewable Energy"
+            content="Our membership management software provides full automation of membership renewals and payments"
+          />
+          <ProgramItems
+            icon="com.png"
+            title="Communication"
+            content="Our membership management software provides full automation of membership renewals and payments"
+          />
         </div>
       </div>
 
@@ -74,10 +98,10 @@ export default function LandinPage() {
         <img src="start.png" className="w-full md:w-1/2" />
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
-          <h1 className="text-2xl  font-bold">
+          <h1 className="text-2xl  font-bold text-fontColor">
             Promoting Commercial Trade/Exchange Between Nigeria and Morocco
           </h1>
-          <p className="text-justify">
+          <p className="text-justify text-[13px] text-fontColor">
             We invite you to participate at the 1st Edition of the
             Nigeria-Morocco Business Week, scheduled to take place at the
             Exhibition Parks and Economic Zones in Casablanca, Morocco from May
@@ -102,19 +126,23 @@ export default function LandinPage() {
           <h1 className="text-lightGreen text-2xl font-bold">
             Exhibition space?
           </h1>
-          <p className="text-center">
+          <p className="text-center text-fontColor text-[13px]">
             We reached here with our hard work and dedication
           </p>
-          <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+          <Button className="bg-lightGreen w-1/2 mt-4 md:w-[150px] h-12 text-white hover:bg-black">
             Book A Space
           </Button>
         </div>
 
-        <div className="grid grid-cols-2 gap-10">
-          <NumberCards />
-          <NumberCards />
-          <NumberCards />
-          <NumberCards />
+        <div className="grid grid-cols-2 gap-20">
+          <NumberCards
+            icon="Icon.svg"
+            label="Members registered"
+            value="2,245"
+          />
+          <NumberCards icon="hand.png" label="Sectors" value="8" />
+          <NumberCards icon="space.png" label="Space Bookings" value="20" />
+          <NumberCards icon="pay.png" label="Payments" value="30" />
         </div>
       </div>
       <Footer />

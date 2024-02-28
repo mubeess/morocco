@@ -13,6 +13,7 @@ export default {
         lightGreen: '#4CAF4F',
         silver: '#F5F7FA',
         lightBlack: '#263238',
+        fontColor: '#4D4D4D',
       },
       height: {
         70: '70vh',
