@@ -1,11 +1,31 @@
 import CarouselItem from './componets/CarouselItem';
 import { Carousel } from 'react-responsive-carousel';
 import ProgramItems from './componets/ProgramItems';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import NumberCards from './componets/NumberCards';
 import Footer from './componets/Footer';
+import { useState } from 'react';
+import PhoneInput from './componets/PhoneInput';
+import { useNavigate } from 'react-router-dom';
+
 export default function LandinPage() {
   const ITEMS = ['SLIDE', 'SLIDE2', 'SLIDE3'];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [value, setValue] = useState('+234');
+  const [phone, setPhone] = useState('');
+  const navigate = useNavigate();
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="relative min-h-screen bg-white">
       {/* Hero Section */}
@@ -25,7 +45,9 @@ export default function LandinPage() {
             <a className="text-[12px]" href="/">
               Exhibitors
             </a>
-            <Button className="bg-lightGreen w-[115px] h-[40px]   text-white">
+            <Button
+              onClick={showModal}
+              className="bg-lightGreen w-[115px] h-[40px]   text-white">
               Participate
             </Button>
           </div>
@@ -146,6 +168,35 @@ export default function LandinPage() {
         </div>
       </div>
       <Footer />
+
+      <Modal
+        footer={false}
+        centered
+        title=""
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}>
+        <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
+          <img src="phone.png" className="mt-[auto]" />
+          <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
+          <PhoneInput
+            phone={phone}
+            value={value}
+            setPhone={setPhone}
+            setValue={setValue}
+          />
+
+          <div className="mt-[auto] ml-[auto] flex gap-4">
+            <Button className="h-[40px]">Cancel</Button>
+            <Button
+              onClick={() => navigate('Register')}
+              className="bg-lightGreen h-[40px]"
+              type="primary">
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -14,6 +14,7 @@ export default {
         silver: '#F5F7FA',
         lightBlack: '#263238',
         fontColor: '#4D4D4D',
+        bgImage: 'rgba(242, 242, 242, 0.85)',
       },
       height: {
         70: '70vh',
