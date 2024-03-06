@@ -62,7 +62,7 @@ export default function LandinPage() {
           infiniteLoop
           className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start">
           {ITEMS.map((item) => (
-            <CarouselItem key={item} />
+            <CarouselItem openModal={showModal} key={item} />
           ))}
         </Carousel>
       </div>
@@ -151,7 +151,9 @@ export default function LandinPage() {
           <p className="text-center text-fontColor text-[13px]">
             We reached here with our hard work and dedication
           </p>
-          <Button className="bg-lightGreen w-1/2 mt-4 md:w-[150px] h-12 text-white hover:bg-black">
+          <Button
+            onClick={showModal}
+            className="bg-lightGreen w-1/2 mt-4 md:w-[150px] h-12 text-white hover:bg-black">
             Book A Space
           </Button>
         </div>
