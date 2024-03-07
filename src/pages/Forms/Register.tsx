@@ -62,18 +62,18 @@ export default function Register() {
   return (
     <div
       style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-y-auto ">
+      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden">
       <div
         style={{
           backgroundImage: 'url(round.png)',
           backgroundRepeat: 'no-repeat',
         }}
-        className="fixed top-0 bottom-0 right-0 left-0 bg-bgImage h-[100vh] overflow-y-scroll bg-contain bg-center flex flex-col items-center p-11">
+        className="fixed top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
         <h1 className="text-lightGreen font-bold text-4xl">Register Now!</h1>
         <span>to be a part of the exhibition.</span>
         <p className="text-2xl"> Fill the information carefully</p>
 
-        <div className="flex-1 flex-col bg-transparent min-[200px] w-full md:w-[70%] mt-5">
+        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[70%] mt-5 overflow-x-hidden">
           <span className="text-[18px] text-lightGreen">
             Company/Personal Information
           </span>
@@ -201,7 +201,7 @@ export default function Register() {
             </Dragger>
           </div>
 
-          <div className="flex gap-4 items-center justify-end mt-10">
+          <div className="flex gap-4 items-center justify-end mt-10 mb-5">
             <Button className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
               Reset
             </Button>

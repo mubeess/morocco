@@ -39,7 +39,7 @@ export default function PaymentSumarryModal({ isOpened, handleClose }: IProps) {
           <span className="text-[#7A8599] text-[12px]">
             Select payment method
           </span>
-          <div className="flex gap-3 items-center mt-3">
+          <div className="flex flex-col md:flex-row gap-3 items-center mt-3">
             {Buttons.map((methods, index) => (
               <PaymentType
                 image={methods.image}
@@ -51,7 +51,7 @@ export default function PaymentSumarryModal({ isOpened, handleClose }: IProps) {
           <Button
             onClick={() => navigate('/Invoice')}
             type="primary"
-            className="bg-lightGreen h-[38px] w-full mt-[auto] mb-2">
+            className="bg-lightGreen h-[38px] w-full mt-2 md:mt-[auto] mb-2">
             Make Payment
           </Button>
         </div>
