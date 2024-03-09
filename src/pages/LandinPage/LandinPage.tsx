@@ -191,7 +191,14 @@ export default function LandinPage() {
           <div className="mt-[auto] ml-[auto] flex gap-4">
             <Button className="h-[40px]">Cancel</Button>
             <Button
-              onClick={() => navigate('Register')}
+              onClick={() => {
+                if (phone && value) {
+                  navigate('Register', {
+                    state: { phoneNumber: value + phone },
+                  });
+                }
+                console.log(phone, value);
+              }}
               className="bg-lightGreen h-[40px]"
               type="primary">
               Confirm
