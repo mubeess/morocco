@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Input from '../../components/Input';
 import { InboxOutlined } from '@ant-design/icons';
 
-import { Button, message, Modal, Upload } from 'antd';
+import { Button, message, Modal, Spin, Upload } from 'antd';
 import PaymentSumarryModal from './components/PaymentSumarryModal';
 import { useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -36,6 +36,7 @@ interface UploadProps {
 export default function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openSummary, setOpenSummary] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[] | []>([]);
   const [userId, setUserId] = useState<string>('');
@@ -56,7 +57,7 @@ export default function Register() {
     creation_date: Yup.date().required('Creation date is required'),
     address: Yup.string().required('Address is required'),
     number_of_employees: Yup.number(),
-    website: Yup.string().url('Invalid website URL'),
+    website: Yup.string(),
     mobile: Yup.string().required('Mobile number is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     company_niche: Yup.array()
@@ -88,7 +89,7 @@ export default function Register() {
       if (registered.status) {
         setUserId(registered.data);
         setEmail(values.email);
-        message.success('Registered successfully');
+        message.success('Registered successfully!');
         formik.resetForm();
         openSummaryModal();
       }
@@ -144,6 +145,7 @@ export default function Register() {
     action: 'https://api.cloudinary.com/v1_1/nutscoders/image/upload',
     beforeUpload: (file) => {
       const uploadPreset = 'se5hxkgw'; // Replace with your Cloudinary upload preset name
+      setUploading(true);
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', uploadPreset);
@@ -169,10 +171,11 @@ export default function Register() {
           console.error('Upload error:', error);
           message.error(`${file.name} upload failed.`);
         });
-
+      setUploading(false);
       // Return false to prevent default upload behavior
       return false;
     },
+
     onDrop(e) {
       console.log('Dropped files', e.dataTransfer.files);
     },
@@ -379,14 +382,18 @@ export default function Register() {
 
           <span className="mt-5">Upload Passport</span>
           <div className="h-[200px] md:h-[150px] mt-4">
-            <Dragger showUploadList={false} className="h-[150px]" {...props}>
+            <Dragger showUploadList={true} className="h-[150px]" {...props}>
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
               </p>
+
               <p className="ant-upload-text">
+                {uploading && <Spin size="large" spinning />}
                 Click or drag file to this area to upload
               </p>
-              <p className="ant-upload-hint">Please Upload your passport</p>
+              <p className="ant-upload-hint">
+                Please Upload or Capture your passport
+              </p>
             </Dragger>
           </div>
 

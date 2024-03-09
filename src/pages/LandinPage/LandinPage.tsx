@@ -1,7 +1,7 @@
 import CarouselItem from './componets/CarouselItem';
 import { Carousel } from 'react-responsive-carousel';
 import ProgramItems from './componets/ProgramItems';
-import { Button, Modal } from 'antd';
+import { Button, Modal, message } from 'antd';
 import NumberCards from './componets/NumberCards';
 import Footer from './componets/Footer';
 import { useState } from 'react';
@@ -196,8 +196,9 @@ export default function LandinPage() {
                   navigate('Register', {
                     state: { phoneNumber: value + phone },
                   });
+                } else {
+                  message.warning('Phone number is required');
                 }
-                console.log(phone, value);
               }}
               className="bg-lightGreen h-[40px]"
               type="primary">
