@@ -54,7 +54,7 @@ function Input({
           // borderBottom: outlined
           //   ? "1px solid var(--stroke)"
           //   : "1px solid var(--primary)",
-          borderBottom: outlined ? '1px solid var(--stroke)' : 'none',
+
           borderRadius: 5,
           padding: 5,
           paddingLeft: 20,

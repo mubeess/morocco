@@ -15,6 +15,9 @@ export default {
         lightBlack: '#263238',
         fontColor: '#4D4D4D',
         bgImage: 'rgba(242, 242, 242, 0.85)',
+        cardGreen: '#009A49',
+        cardRed: '#C1272D',
+        cardBlack: '#212121',
       },
       height: {
         70: '70vh',

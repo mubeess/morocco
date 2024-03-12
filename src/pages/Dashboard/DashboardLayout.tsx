@@ -24,7 +24,7 @@ export default function DashboardLayout() {
             </div>
           </div>
         </div>
-        <div className="flex-1 p-10">{<Outlet />}</div>
+        <div className="flex-1 flex flex-col p-10">{<Outlet />}</div>
       </div>
     </div>
   );
