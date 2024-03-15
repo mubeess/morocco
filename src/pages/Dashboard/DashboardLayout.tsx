@@ -3,8 +3,8 @@ import DashbordIcon from './compopnents/DashbordIcon';
 
 export default function DashboardLayout() {
   return (
-    <div className="flex h-[100vh] w-full bg-white">
-      <div className="w-0 md:w-[15%] h-full bg-[#F2F2F2] py-20 px-5">
+    <div className="flex h-[100vh] w-[100vw] bg-white overflow-x-hidden">
+      <div className="hidden md:w-[15%] md:flex flex-col h-full bg-[#F2F2F2] py-20 px-5">
         <h1 className="text-[12px] md:text-[14px] font-bold text-center mb-32">
           🇳🇬 NIGERIA-MOROCCO 🇲🇦
         </h1>
