@@ -1,18 +1,17 @@
-import CarouselItem from './componets/CarouselItem';
-import { Carousel } from 'react-responsive-carousel';
-import ProgramItems from './componets/ProgramItems';
-import { Button, Modal, message } from 'antd';
-import NumberCards from './componets/NumberCards';
-import Footer from './componets/Footer';
-import { useState } from 'react';
-import PhoneInput from './componets/PhoneInput';
-import { useNavigate } from 'react-router-dom';
+import CarouselItem from "./componets/CarouselItem";
+import { Carousel } from "react-responsive-carousel";
+import ProgramItems from "./componets/ProgramItems";
+import { Button, Modal, message } from "antd";
+import Footer from "./componets/Footer";
+import { useState } from "react";
+import PhoneInput from "./componets/PhoneInput";
+import { useNavigate } from "react-router-dom";
 
 export default function LandinPage() {
-  const ITEMS = ['SLIDE', 'SLIDE2', 'SLIDE3'];
+  const ITEMS = ["SLIDE", "SLIDE2", "SLIDE3"];
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [value, setValue] = useState('+234');
-  const [phone, setPhone] = useState('');
+  const [value, setValue] = useState("+234");
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -47,7 +46,8 @@ export default function LandinPage() {
             </a>
             <Button
               onClick={showModal}
-              className="bg-lightGreen w-[115px] h-[40px]   text-white">
+              className="bg-lightGreen w-[115px] h-[40px]   text-white"
+            >
               Participate
             </Button>
           </div>
@@ -60,7 +60,8 @@ export default function LandinPage() {
           autoPlay
           showArrows={false}
           infiniteLoop
-          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start">
+          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start"
+        >
           {ITEMS.map((item) => (
             <CarouselItem openModal={showModal} key={item} />
           ))}
@@ -97,19 +98,18 @@ export default function LandinPage() {
         </p>
         <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems
-            title="Automobile"
-            content="Our membership management software provides full automation of membership renewals and payments"
-            icon="Icon.png"
+            icon="com.png"
+            title="Agriculture & Agro-allied Products"
+            content=""
           />
-          <ProgramItems
-            icon="energy.png"
-            title="Renewable Energy"
-            content="Our membership management software provides full automation of membership renewals and payments"
-          />
+          <ProgramItems title="Automobile" content="" icon="Icon.png" />
+          <ProgramItems icon="energy.png" title="Renewable Energy" content="" />
+          <ProgramItems icon="com.png" title="Solid Mineral" content="" />
+          <ProgramItems icon="com.png" title="Digital Economy" content="" />
           <ProgramItems
             icon="com.png"
-            title="Communication"
-            content="Our membership management software provides full automation of membership renewals and payments"
+            title="Banking & E-Government"
+            content=""
           />
         </div>
       </div>
@@ -144,29 +144,24 @@ export default function LandinPage() {
       {/* Space Booking */}
       <div className="flex bg-silver  min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40">
         <div className="gap-4">
-          <h1 className="text-2xl font-bold">Want an</h1>
-          <h1 className="text-lightGreen text-2xl font-bold">
-            Exhibition space?
+          <h1 className="text-4xl font-bold">
+            Want an{" "}
+            <span className="text-lightGreen text-4xl font-bold">
+              Exhibition space?
+            </span>
           </h1>
-          <p className="text-center text-fontColor text-[13px]">
+          <p className="text-left text-fontColor mt-2">
             We reached here with our hard work and dedication
           </p>
-          <Button
-            onClick={showModal}
-            className="bg-lightGreen w-1/2 mt-4 md:w-[150px] h-12 text-white hover:bg-black">
-            Book A Space
-          </Button>
         </div>
 
         <div className="grid grid-cols-2 gap-20">
-          <NumberCards
-            icon="Icon.svg"
-            label="Members registered"
-            value="2,245"
-          />
-          <NumberCards icon="hand.png" label="Sectors" value="8" />
-          <NumberCards icon="space.png" label="Space Bookings" value="20" />
-          <NumberCards icon="pay.png" label="Payments" value="30" />
+          <Button
+            onClick={showModal}
+            className="bg-lightGreen w-1/2 mt-4 md:w-[200px] h-12 text-white hover:bg-black"
+          >
+            Book A Space
+          </Button>
         </div>
       </div>
       <Footer />
@@ -177,7 +172,8 @@ export default function LandinPage() {
         title=""
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}>
+        onCancel={handleCancel}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -193,15 +189,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Register', {
+                  navigate("Register", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>

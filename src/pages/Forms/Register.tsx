@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import Input from '../../components/Input';
-import { InboxOutlined } from '@ant-design/icons';
+import { useState } from "react";
+import Input from "../../components/Input";
+import { InboxOutlined } from "@ant-design/icons";
 
-import { Button, message, Modal, Spin, Upload } from 'antd';
-import PaymentSumarryModal from './components/PaymentSumarryModal';
-import { useLocation } from 'react-router-dom';
-import * as Yup from 'yup';
+import { Button, message, Modal, Spin, Upload } from "antd";
+import PaymentSumarryModal from "./components/PaymentSumarryModal";
+import { useLocation } from "react-router-dom";
+import * as Yup from "yup";
 
-import { useFormik } from 'formik';
-import useRegister from './hooks/useRegister';
+import { useFormik } from "formik";
+import useRegister from "./hooks/useRegister";
+import AntTextArea from "../../components/TextArea";
 
 const { Dragger } = Upload;
 
@@ -39,8 +40,8 @@ export default function Register() {
   const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[] | []>([]);
-  const [userId, setUserId] = useState<string>('');
-  const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState<string>("");
+  const [email, setEmail] = useState("");
   const { register, registering } = useRegister();
   const location = useLocation();
   const [phoneNumber] = useState(location.state.phoneNumber);
@@ -53,34 +54,34 @@ export default function Register() {
   };
 
   const validationSchema = Yup.object().shape({
-    company_name: Yup.string().required('Company name is required'),
-    creation_date: Yup.date().required('Creation date is required'),
-    address: Yup.string().required('Address is required'),
+    company_name: Yup.string().required("Company name is required"),
+    creation_date: Yup.date().required("Creation date is required"),
+    address: Yup.string().required("Address is required"),
     number_of_employees: Yup.number(),
     website: Yup.string(),
-    mobile: Yup.string().required('Mobile number is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    mobile: Yup.string().required("Mobile number is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
     company_niche: Yup.array()
       .of(Yup.string())
-      .required('Company niche is required'),
+      .required("Company niche is required"),
     meeting_sectors: Yup.array().of(Yup.string()),
     import_morocco: Yup.string(),
     export_morocco: Yup.string(),
-    image_url: Yup.string().url('Invalid image URL'),
+    image_url: Yup.string().url("Invalid image URL"),
   });
   const initialValues: InitialValuesProps = {
-    company_name: '',
-    creation_date: '',
-    address: '',
-    number_of_employees: '',
-    website: '',
+    company_name: "",
+    creation_date: "",
+    address: "",
+    number_of_employees: "",
+    website: "",
     mobile: phoneNumber,
-    email: '',
+    email: "",
     company_niche: [],
-    import_morocco: '',
-    export_morocco: '',
+    import_morocco: "",
+    export_morocco: "",
     meeting_sectors: [],
-    image_url: '',
+    image_url: "",
   };
   const formik = useFormik({
     initialValues,
@@ -89,7 +90,7 @@ export default function Register() {
       if (registered.status) {
         setUserId(registered.data);
         setEmail(values.email);
-        message.success('Registered successfully!');
+        message.success("Registered successfully!");
         formik.resetForm();
         openSummaryModal();
       }
@@ -105,19 +106,19 @@ export default function Register() {
     setIsModalOpen(false);
   };
   const [companyNiche] = useState([
-    'Importer/User',
-    'Wholesaler/Distributor',
-    'Intermediary',
-    'Central Purchasing',
-    'Manufacturer',
+    "Importer/User",
+    "Wholesaler/Distributor",
+    "Intermediary",
+    "Central Purchasing",
+    "Manufacturer",
   ]);
 
   const [meetingWith] = useState([
-    'Agriculture & Agro Allied',
-    'Automobile',
-    'Solid Minerals',
-    'Energy (renewable energy)',
-    'Information Technology',
+    "Agriculture & Agro Allied",
+    "Automobile",
+    "Solid Minerals",
+    "Energy (renewable energy)",
+    "Information Technology",
   ]);
   // const [selectedAvailability, setSelectedAvailabilty] = useState([]);
   // const props: UploadProps = {
@@ -140,25 +141,25 @@ export default function Register() {
   //   },
   // };
   const props: UploadProps = {
-    name: 'file',
+    name: "file",
     multiple: false,
-    action: 'https://api.cloudinary.com/v1_1/nutscoders/image/upload',
+    action: "https://api.cloudinary.com/v1_1/nutscoders/image/upload",
     beforeUpload: (file) => {
-      const uploadPreset = 'se5hxkgw'; // Replace with your Cloudinary upload preset name
+      const uploadPreset = "se5hxkgw"; // Replace with your Cloudinary upload preset name
       setUploading(true);
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', uploadPreset);
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
 
       // Upload the file
-      fetch('https://api.cloudinary.com/v1_1/nutscoders/image/upload', {
-        method: 'POST',
+      fetch("https://api.cloudinary.com/v1_1/nutscoders/image/upload", {
+        method: "POST",
         body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
           // Handle the upload response
-          console.log('Upload response:', data);
+          console.log("Upload response:", data);
           if (data.error) {
             message.error(`${file.name} upload failed: ${data.error.message}`);
           } else {
@@ -168,7 +169,7 @@ export default function Register() {
           }
         })
         .catch((error) => {
-          console.error('Upload error:', error);
+          console.error("Upload error:", error);
           message.error(`${file.name} upload failed.`);
         });
       setUploading(false);
@@ -177,25 +178,27 @@ export default function Register() {
     },
 
     onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
+      console.log("Dropped files", e.dataTransfer.files);
     },
   };
 
   return (
     <div
       // style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden">
+      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden"
+    >
       <div
         // style={{
         //   backgroundImage: 'url(round.png)',
         //   backgroundRepeat: 'no-repeat',
         // }}
-        className="fixed top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden"
+      >
         <h1 className="text-lightGreen font-bold text-4xl">Register Now!</h1>
         <span>to be a part of the exhibition.</span>
         <p className="text-2xl"> Fill the information carefully</p>
 
-        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[70%] mt-5 overflow-x-hidden">
+        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
           <span className="text-[18px] text-lightGreen">
             Company/Personal Information
           </span>
@@ -204,7 +207,7 @@ export default function Register() {
               error={
                 formik.touched.company_name && formik.errors.company_name
                   ? formik.errors.company_name
-                  : ''
+                  : ""
               }
               value={formik.values.company_name}
               onChange={formik.handleChange}
@@ -220,7 +223,7 @@ export default function Register() {
               error={
                 formik.touched.creation_date && formik.errors.creation_date
                   ? formik.errors.creation_date
-                  : ''
+                  : ""
               }
               value={formik.values.creation_date}
               id="creation_date"
@@ -234,11 +237,11 @@ export default function Register() {
             />
           </div>
 
-          <Input
+          <AntTextArea
             error={
               formik.touched.address && formik.errors.address
                 ? formik.errors.address
-                : ''
+                : ""
             }
             value={formik.values.address}
             onChange={formik.handleChange}
@@ -253,7 +256,7 @@ export default function Register() {
               error={
                 formik.touched.website && formik.errors.website
                   ? formik.errors.website
-                  : ''
+                  : ""
               }
               value={formik.values.website}
               onChange={formik.handleChange}
@@ -270,7 +273,7 @@ export default function Register() {
                 formik.touched.number_of_employees &&
                 formik.errors.number_of_employees
                   ? formik.errors.number_of_employees
-                  : ''
+                  : ""
               }
               value={formik.values.number_of_employees}
               onChange={formik.handleChange}
@@ -296,7 +299,7 @@ export default function Register() {
               error={
                 formik.touched.email && formik.errors.email
                   ? formik.errors.email
-                  : ''
+                  : ""
               }
               value={formik.values.email}
               id="email"
@@ -329,11 +332,11 @@ export default function Register() {
             </div>
           ))}
 
-          <Input
+          <AntTextArea
             error={
               formik.touched.import_morocco && formik.errors.import_morocco
                 ? formik.errors.import_morocco
-                : ''
+                : ""
             }
             value={formik.values.import_morocco}
             id="import_morocco"
@@ -343,11 +346,11 @@ export default function Register() {
             placeholder="Type here"
           />
 
-          <Input
+          <AntTextArea
             error={
               formik.touched.export_morocco && formik.errors.export_morocco
                 ? formik.errors.export_morocco
-                : ''
+                : ""
             }
             value={formik.values.export_morocco}
             id="export_morocco"
@@ -410,7 +413,8 @@ export default function Register() {
                 formik.handleSubmit();
               }}
               className="bg-lightGreen h-[38px]"
-              type="primary">
+              type="primary"
+            >
               Submit & proceed to payment
             </Button>
           </div>
@@ -424,7 +428,8 @@ export default function Register() {
         centered
         title=""
         open={isModalOpen}
-        onOk={handleOk}>
+        onOk={handleOk}
+      >
         <div className="flex flex-col min-h-[400px] bg-white  items-cente p-3">
           <h1 className="text-[16px] text-black">Terms and Conditions</h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px]">
@@ -451,13 +456,15 @@ export default function Register() {
           <div className="flex gap-4 items-center justify-end mt-5">
             <Button
               onClick={handleCancel}
-              className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
+              className="border-lightGreen bg-transparent text-lightGreen h-[38px]"
+            >
               Cancel
             </Button>
             <Button
               onClick={handleCancel}
               className="bg-lightGreen h-[38px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
