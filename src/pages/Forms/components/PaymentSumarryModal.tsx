@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePaystackPayment } from 'react-paystack';
 import { useEffect, useState } from 'react';
 import useGenerateRef from '../hooks/useGenerateRef';
+import useRegistrationToken from '../hooks/useRegistrationToken';
 interface IProps {
   isOpened: boolean;
   handleClose: () => void;
@@ -20,6 +21,7 @@ export default function PaymentSumarryModal({
   const [ref, setRef] = useState('');
   const [active, setActive] = useState(0);
   const [amount, setAmount] = useState(0);
+  const { registering, registerToken } = useRegistrationToken();
   const { generateRef, generating } = useGenerateRef();
   const onSuccess = () => {
     setAmount(0);
@@ -93,9 +95,17 @@ export default function PaymentSumarryModal({
             ))}
           </div>
           <Button
-            loading={generating}
+            loading={generating || registering}
             onClick={async () => {
               if (Buttons[active].value == 'CODE') {
+                const verrified = await registerToken(email);
+                if (verrified) {
+                  message.success('Successfully Payed');
+                  handleClose();
+                  navigate('/');
+                } else {
+                  message.error('Error Making Payment');
+                }
                 return;
               }
               const generated = await generateRef(id, {
