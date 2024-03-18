@@ -17,7 +17,7 @@ const useBooking = () => {
       stopLoading();
 
       if (response.data.success) {
-        console.log(response.data);
+        console.log(response.data.data);
         return { data: response.data, status: true };
       } else {
         return { data: null, status: false };

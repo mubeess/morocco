@@ -45,7 +45,6 @@ const useVerifyBooking = (id: string) => {
 
       stopLoading();
       if (response.data.success) {
-        message.success('Successfully');
         setData(response.data.data);
       }
     } catch (error) {
