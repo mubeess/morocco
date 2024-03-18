@@ -76,9 +76,10 @@ export default function Booking() {
       if (booked.status) {
         setEmail(values.email);
         formik.resetForm();
-        setRef(booked.data.transaction_ref);
-        setAmount(booked.data.amount);
-        setId(booked.data.id);
+        // console.log(booked, 'booked');
+        setRef(booked.data.data.transaction_ref);
+        setAmount(100 * Number(booked.data.data.amount));
+        setId(booked.data.data.id);
       }
     },
     validationSchema,
@@ -97,6 +98,7 @@ export default function Booking() {
   useEffect(() => {
     // This effect will run every time `amount` or `ref` changes
     if (amount !== 0 && ref !== '') {
+      console.log(amount, ref);
       // If both `amount` and `ref` have been set, make the payment
       makePayment(onSuccess, onClose);
     }
