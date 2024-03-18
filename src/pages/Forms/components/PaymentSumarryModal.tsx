@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { usePaystackPayment } from 'react-paystack';
 import { useEffect, useState } from 'react';
 import useGenerateRef from '../hooks/useGenerateRef';
+import useRegistrationToken from '../hooks/useRegistrationToken';
+import Input from '../../../components/Input';
 interface IProps {
   isOpened: boolean;
   handleClose: () => void;
@@ -20,6 +22,8 @@ export default function PaymentSumarryModal({
   const [ref, setRef] = useState('');
   const [active, setActive] = useState(0);
   const [amount, setAmount] = useState(0);
+  const [token, setToken] = useState('');
+  const { registering, registerToken } = useRegistrationToken();
   const { generateRef, generating } = useGenerateRef();
   const onSuccess = () => {
     setAmount(0);
@@ -62,7 +66,7 @@ export default function PaymentSumarryModal({
       onCancel={handleClose}
       open={isOpened}
       onOk={handleClose}>
-      <div className="flex flex-col min-h-[400px] bg-white">
+      <div className="flex flex-col min-h-[450px] bg-white">
         <div className="h-[75px] bg-[#F2F2F2] w-full flex items-center pl-3">
           <h1 className="italic text-[#7A8599]">Payment History</h1>
         </div>
@@ -92,10 +96,31 @@ export default function PaymentSumarryModal({
               />
             ))}
           </div>
+          {Buttons[active].value == 'CODE' && (
+            <Input
+              outlined
+              placeholder="Enter Token"
+              onChange={(e) => setToken(e.target.value)}
+              label="Provide Token"
+            />
+          )}
           <Button
-            loading={generating}
+            loading={generating || registering}
             onClick={async () => {
               if (Buttons[active].value == 'CODE') {
+                if (token) {
+                  const verrified = await registerToken(email, token);
+                  if (verrified) {
+                    message.success('Successfully Payed');
+                    handleClose();
+                    navigate('/');
+                  } else {
+                    message.error('Error Making Payment');
+                  }
+                } else {
+                  message.warning('Insert Token');
+                }
+
                 return;
               }
               const generated = await generateRef(id, {
