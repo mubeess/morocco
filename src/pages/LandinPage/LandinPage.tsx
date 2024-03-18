@@ -13,6 +13,7 @@ export default function LandinPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [value, setValue] = useState('+234');
   const [phone, setPhone] = useState('');
+
   const navigate = useNavigate();
 
   const showModal = () => {

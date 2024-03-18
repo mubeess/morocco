@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '../../components/Input';
 import { InboxOutlined } from '@ant-design/icons';
 
 import { Button, message, Modal, Spin, Upload } from 'antd';
 import PaymentSumarryModal from './components/PaymentSumarryModal';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { useFormik } from 'formik';
 import useRegister from './hooks/useRegister';
+import { useTranslation } from 'react-i18next';
 
 const { Dragger } = Upload;
 
@@ -42,8 +43,18 @@ export default function Register() {
   const [userId, setUserId] = useState<string>('');
   const [email, setEmail] = useState('');
   const { register, registering } = useRegister();
+  const navigate = useNavigate();
   const location = useLocation();
-  const [phoneNumber] = useState(location.state.phoneNumber);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    if (phoneNumber.startsWith('+234')) {
+      i18n.changeLanguage('en');
+    } else {
+      i18n.changeLanguage('fr');
+    }
+  }, []);
+  const [phoneNumber] = useState<string>(location.state.phoneNumber);
   const openSummaryModal = () => {
     setOpenSummary(true);
   };
@@ -88,10 +99,15 @@ export default function Register() {
       const registered = await register(values);
       if (registered.status) {
         setUserId(registered.data);
-        setEmail(values.email);
-        message.success('Registered successfully!');
         formik.resetForm();
-        openSummaryModal();
+        message.success('Registered successfully!');
+        if (phoneNumber.startsWith('+234')) {
+          setEmail(values.email);
+
+          openSummaryModal();
+        } else {
+          navigate('/');
+        }
       }
     },
     validationSchema,
@@ -191,14 +207,12 @@ export default function Register() {
         //   backgroundRepeat: 'no-repeat',
         // }}
         className="fixed top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
-        <h1 className="text-lightGreen font-bold text-4xl">Register Now!</h1>
-        <span>to be a part of the exhibition.</span>
-        <p className="text-2xl"> Fill the information carefully</p>
+        <h1 className="text-lightGreen font-bold text-4xl">{t('Register')}</h1>
+        <span>{t('Part')}</span>
+        <p className="text-2xl"> {t('Fill')}</p>
 
         <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[70%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-lightGreen">
-            Company/Personal Information
-          </span>
+          <span className="text-[18px] text-lightGreen">{t('Personal')}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
@@ -211,7 +225,7 @@ export default function Register() {
               id="company_name"
               className="w-full md:w-[70%]"
               required
-              label="Company Name"
+              label={t('Name')}
               placeholder="Enter the name of the company"
               outlined={false}
             />
@@ -227,7 +241,7 @@ export default function Register() {
               onChange={formik.handleChange}
               className="w-full md:w-[30%]"
               required
-              label="Date of Craetion"
+              label={t('Creation')}
               placeholder="Enter the name of the company"
               outlined={false}
               type="date"
@@ -244,7 +258,7 @@ export default function Register() {
             onChange={formik.handleChange}
             required
             id="address"
-            label="Address"
+            label={t('Address')}
             outlined={false}
             placeholder="Type your address"
           />
@@ -258,7 +272,7 @@ export default function Register() {
               value={formik.values.website}
               onChange={formik.handleChange}
               className="w-full md:w-[70%]"
-              label="Website"
+              label={t('Website')}
               id="website"
               placeholder="www.example.com"
               outlined={false}
@@ -275,7 +289,7 @@ export default function Register() {
               value={formik.values.number_of_employees}
               onChange={formik.handleChange}
               className="w-full md:w-[30%]"
-              label="Number of employees"
+              label={t('Employees')}
               outlined={false}
               type="number"
             />
@@ -287,7 +301,7 @@ export default function Register() {
               value={phoneNumber}
               disabled
               className="w-full md:w-[30%]"
-              label="Mobile Number"
+              label={t('Mobile')}
               outlined={false}
             />
 
@@ -302,12 +316,13 @@ export default function Register() {
               id="email"
               onChange={formik.handleChange}
               className="w-full md:w-[70%]"
-              label="Email Address"
+              label={t('Email')}
               outlined={false}
             />
           </div>
           <h1 className="my-[10px] text-[13px] font-[500]">
-            Your Company is<span className="text-[red]">*</span>
+            {t('Is')}
+            <span className="text-[red]">*</span>
           </h1>
           {companyNiche.map((options, ind) => (
             <div className="mt-3 flex items-center" key={ind.toString()}>
@@ -338,7 +353,7 @@ export default function Register() {
             value={formik.values.import_morocco}
             id="import_morocco"
             onChange={formik.handleChange}
-            label="What are the products you wish to import from Morocco?"
+            label={t('What')}
             outlined={false}
             placeholder="Type here"
           />
@@ -353,13 +368,11 @@ export default function Register() {
             id="export_morocco"
             onChange={formik.handleChange}
             className="mb-10"
-            label="What are the products you wish to export from Morocco?"
+            label={t('Export')}
             outlined={false}
             placeholder="Type here"
           />
-          <span className="font-[500]">
-            Which sectors do you wish to have a B2B meeting with at the event?
-          </span>
+          <span className="font-[500]">{t('Meeting')}</span>
           {meetingWith.map((options, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
               <input
@@ -380,7 +393,7 @@ export default function Register() {
             </div>
           ))}
 
-          <span className="mt-5">Upload Passport</span>
+          <span className="mt-5">{t('Passport')}</span>
           <div className="h-[200px] md:h-[150px] mt-4">
             <Dragger showUploadList={true} className="h-[150px]" {...props}>
               <p className="ant-upload-drag-icon">
@@ -389,7 +402,7 @@ export default function Register() {
 
               <p className="ant-upload-text">
                 {uploading && <Spin size="large" spinning />}
-                Click or drag file to this area to upload
+                {t('Drag')}
               </p>
               <p className="ant-upload-hint">
                 Please Upload or Capture your passport
@@ -411,7 +424,9 @@ export default function Register() {
               }}
               className="bg-lightGreen h-[38px]"
               type="primary">
-              Submit & proceed to payment
+              {phoneNumber.startsWith('+234')
+                ? 'Submit & proceed to payment'
+                : t('Submit')}
             </Button>
           </div>
         </div>
