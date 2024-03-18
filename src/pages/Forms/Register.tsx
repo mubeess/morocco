@@ -434,18 +434,105 @@ export default function Register() {
           <h1 className="text-[16px] text-black">Terms and Conditions</h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px]">
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur. Nibh aliquet vel ut
-              bibendum. Mauris ultrices justo fermentum malesuada ullamcorper.
-              Faucibus sit nulla quam consequat odio pharetra sit scelerisque.
-              Sit mauris risus gravida orci ut lacus posuere. Enim lobortis
-              ultrices aliquet eget. Sem orci odio vitae lobortis viverra
-              suspendisse tortor morbi dui. Adipiscing augue semper mi tristique
-              iaculis et. Rhoncus porta at nec consequat. Tortor in sollicitudin
-              mattis mattis sit risus. Et integer accumsan justo quam enim
-              tincidunt ipsum tellus. Integer ut dolor sit fermentum porta.
-              Egestas sed suscipit donec ornare tempus risus. Scelerisque
-              vulputate porta magna vulputate consequat eget sit bibendum
-              imperdiet. Aliquet nulla habitant magna egestas aliquam.
+              <p>
+                Welcome to Nigeria-Morocco Business Week! By proceeding with the
+                registration process, you agree to the following terms and
+                conditions:{" "}
+              </p>
+              Registration Information: <br />
+              1.1 You must provide accurate and complete information during the
+              registration process. <br />
+              1.2 You are responsible for maintaining the confidentiality of
+              your account credentials and for all activities that occur under
+              your account. <br />
+              <p>Data Collection and Use: </p>
+              2.1 We collect personal information such as your name, email
+              address, and other relevant details for registration and
+              communication purposes. <br />
+              2.2 Your data may be shared with third parties for specific
+              purposes such as marketing, analytics, or service provision. We
+              will not sell or rent your personal information to third parties
+              without your explicit consent.
+              <br />
+              2.3 We may collect non-personal information such as browser type,
+              IP address, and usage patterns to improve our services and user
+              experience.
+              <br />
+              <p>Cookies and Tracking:</p>
+              3.1 We use cookies and similar technologies to enhance your
+              browsing experience and track usage patterns.
+              <br />
+              3.2 By using our website, you consent to the use of cookies and
+              tracking technologies as described in our Privacy Policy.
+              <br />
+              <p>Content Submission:</p>
+              4.1 You are solely responsible for any content you submit or
+              upload to the website.
+              <br />
+              4.2 By submitting content, you grant us a non-exclusive,
+              royalty-free, perpetual, irrevocable, and worldwide license to
+              use, reproduce, modify, adapt, publish, translate, distribute, and
+              display such content.
+              <br />
+              <p>Intellectual Property:</p>
+              5.1 All content and materials on the website, including but not
+              limited to text, graphics, logos, and software, are owned or
+              licensed by us and are protected by intellectual property laws.
+              <br />
+              5.2 You may not use, reproduce, modify, or distribute any content
+              from the website without our prior written consent.
+              <br />
+              <p>Disclaimer of Warranties:</p>
+              6.1 We strive to provide accurate and up-to-date information, but
+              we do not warrant the completeness, reliability, or accuracy of
+              the content on the website.
+              <br />
+              6.2 Your use of the website is at your own risk, and we disclaim
+              all warranties, express or implied, including but not limited to
+              warranties of merchantability, fitness for a particular purpose,
+              and non-infringement.
+              <br />
+              <p>Limitation of Liability:</p>
+              7.1 We shall not be liable for any direct, indirect, incidental,
+              consequential, or punitive damages arising out of your use or
+              inability to use the website.
+              <br />
+              7.2 Our total liability to you for any claims arising from or
+              related to the website shall not exceed the amount paid by you, if
+              any, for accessing the website.
+              <br />
+              <p>Indemnification:</p>
+              8.1 You agree to indemnify and hold us harmless from any claims,
+              losses, liabilities, damages, costs, and expenses arising out of
+              your use of the website or violation of these terms and
+              conditions.
+              <br />
+              Governing Law: 9.1 These terms and conditions shall be governed by
+              and construed in accordance with the laws of Nigeria and Morocco.
+              <br />
+              9.2 Any disputes arising out of or related to these terms and
+              conditions shall be subject to the exclusive jurisdiction of the
+              courts in Nigeria and Morocco.
+              <br />
+              <p>Changes to Terms:</p>
+              10.1 We reserve the right to modify or update these terms and
+              conditions at any time without prior notice.
+              <br />
+              10.2 Your continued use of the website after such changes
+              constitutes your acceptance of the modified terms.
+              <br />
+              <p>
+                Please review these terms and conditions carefully before
+                proceeding with the registration process. If you do not agree
+                with any part of these terms, please do not proceed further. If
+                you have any questions or concerns, please contact us at
+                info@spectre.com.
+              </p>
+              <p>
+                By clicking "I Agree" or similar buttons, you acknowledge that
+                you have read, understood, and agreed to these terms and
+                conditions.
+              </p>
             </p>
           </div>
           <div className="my-3 flex items-center">
