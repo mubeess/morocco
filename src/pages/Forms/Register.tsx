@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import useRegister from './hooks/useRegister';
 import { useTranslation } from 'react-i18next';
+import AntTextArea from '../../components/TextArea';
 
 const { Dragger } = Upload;
 
@@ -248,7 +249,7 @@ export default function Register() {
             />
           </div>
 
-          <Input
+          <AntTextArea
             error={
               formik.touched.address && formik.errors.address
                 ? formik.errors.address
@@ -344,7 +345,7 @@ export default function Register() {
             </div>
           ))}
 
-          <Input
+          <AntTextArea
             error={
               formik.touched.import_morocco && formik.errors.import_morocco
                 ? formik.errors.import_morocco
@@ -358,7 +359,7 @@ export default function Register() {
             placeholder="Type here"
           />
 
-          <Input
+          <AntTextArea
             error={
               formik.touched.export_morocco && formik.errors.export_morocco
                 ? formik.errors.export_morocco
