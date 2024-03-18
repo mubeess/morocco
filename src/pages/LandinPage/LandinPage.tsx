@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LandinPage() {
   const ITEMS = ['SLIDE', 'SLIDE2', 'SLIDE3'];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [value, setValue] = useState('+234');
   const [phone, setPhone] = useState('');
   const navigate = useNavigate();
@@ -155,7 +156,7 @@ export default function LandinPage() {
 
         <div className="grid grid-cols-2 gap-20">
           <Button
-            onClick={showModal}
+            onClick={() => setBookingModalOpen(true)}
             className="bg-lightGreen w-1/2 mt-4 md:w-[200px] h-12 text-white hover:bg-black">
             Book A Space
           </Button>
@@ -186,6 +187,43 @@ export default function LandinPage() {
               onClick={() => {
                 if (phone && value) {
                   navigate('Register', {
+                    state: { phoneNumber: value + phone },
+                  });
+                } else {
+                  message.warning('Phone number is required');
+                }
+              }}
+              className="bg-lightGreen h-[40px]"
+              type="primary">
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        footer={false}
+        centered
+        title=""
+        open={bookingModalOpen}
+        onOk={() => setBookingModalOpen(false)}
+        onCancel={() => setBookingModalOpen(false)}>
+        <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
+          <img src="phone.png" className="mt-[auto]" />
+          <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
+          <PhoneInput
+            phone={phone}
+            value={value}
+            setPhone={setPhone}
+            setValue={setValue}
+          />
+
+          <div className="mt-[auto] ml-[auto] flex gap-4">
+            <Button className="h-[40px]">Cancel</Button>
+            <Button
+              onClick={() => {
+                if (phone && value) {
+                  navigate('Booking', {
                     state: { phoneNumber: value + phone },
                   });
                 } else {

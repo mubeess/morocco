@@ -5,11 +5,13 @@ import { httpClient } from '../../../utils/config';
 const useRegistrationToken = () => {
   const { loading, startLoading, stopLoading } = useLoading();
 
-  const registerToken = async (email: string) => {
+  const registerToken = async (email: string, token: string) => {
     startLoading();
 
     try {
-      const response = await httpClient.get(`/verify_token/${email}`);
+      const response = await httpClient.get(
+        `/verify_token/${email}/${token}/true`
+      );
       stopLoading();
 
       if (response.data.success) {
