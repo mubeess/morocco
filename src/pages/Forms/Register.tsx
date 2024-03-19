@@ -214,7 +214,7 @@ export default function Register() {
         <span>{t("Part")}</span>
         <p className="text-2xl"> {t("Fill")}</p>
 
-        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[70%] mt-5 overflow-x-hidden">
+        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
           <span className="text-[18px] text-lightGreen">{t("Personal")}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
