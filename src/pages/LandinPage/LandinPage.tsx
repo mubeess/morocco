@@ -95,18 +95,30 @@ export default function LandinPage() {
           The programme is designed to be multi-sectoral with particular focus
           in some areas
         </p>
-        <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
+        <div className="grid place-items-center px-0 py-8 grid-cols-1 md:grid-cols-3 gap-5 gap-y-20 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems
-            icon="com.png"
+            icon="sectors/Agr.jpg"
             title="Agriculture & Agro-allied Products"
             content=""
           />
-          <ProgramItems title="Automobile" content="" icon="Icon.png" />
-          <ProgramItems icon="energy.png" title="Renewable Energy" content="" />
-          <ProgramItems icon="com.png" title="Solid Mineral" content="" />
-          <ProgramItems icon="com.png" title="Digital Economy" content="" />
+          <ProgramItems icon="sectors/car.webp" title="Automobile" content="" />
           <ProgramItems
-            icon="com.png"
+            icon="sectors/renewable.webp"
+            title="Renewable Energy"
+            content=""
+          />
+          <ProgramItems
+            icon="sectors/solid.jpg"
+            title="Solid Mineral"
+            content=""
+          />
+          <ProgramItems
+            icon="sectors/economy.jpg"
+            title="Digital Economy"
+            content=""
+          />
+          <ProgramItems
+            icon="sectors/e.jpeg"
             title="Banking & E-Government"
             content=""
           />
