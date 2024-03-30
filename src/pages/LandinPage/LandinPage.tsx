@@ -5,7 +5,7 @@ import { Button, Modal, message } from 'antd';
 import Footer from './componets/Footer';
 import { useState } from 'react';
 import PhoneInput from './componets/PhoneInput';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LandinPage() {
   const ITEMS = ['SLIDE', 'SLIDE2', 'SLIDE3'];
@@ -50,6 +50,13 @@ export default function LandinPage() {
               className="bg-lightGreen w-[115px] h-[40px]   text-white">
               Participate
             </Button>
+            <Link to="/dashboard">
+              <Button
+                onClick={showModal}
+                className="bg-silver w-[115px] h-[40px]   text-black">
+                Admin
+              </Button>
+            </Link>
           </div>
         </div>
         <Carousel
