@@ -6,6 +6,7 @@ export interface UserType {
   email: string;
   token: string;
   lastName: string;
+  role: string;
 }
 
 export interface UserState {
@@ -18,6 +19,7 @@ const initialState: UserState = {
     lastName: '',
     token: '',
     email: '',
+    role: '',
   },
 };
 const userSlice = createSlice({
