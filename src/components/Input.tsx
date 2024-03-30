@@ -50,7 +50,7 @@ function Input({
         style={{
           opacity: disabled ? 0.5 : 1,
           backgroundColor: '#fff',
-          border: outlined ? '0.2px solid #f9f9f9' : 'none',
+          border: outlined ? '1px solid #f9f9f9' : '0.2px solid #f9f9f9',
           // borderBottom: outlined
           //   ? "1px solid var(--stroke)"
           //   : "1px solid var(--primary)",

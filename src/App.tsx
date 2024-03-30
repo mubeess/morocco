@@ -13,6 +13,8 @@ import Login from './pages/Auth/Login';
 import PrivateRoutes from './pages/PrivateRoutes';
 import { Provider } from 'react-redux';
 import store from './redux';
+import Profile from './pages/Dashboard/profile/Profile';
+import UserProfile from './pages/Dashboard/profile/UserProfile';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/dashboard" element={<PrivateRoutes />}>
                 <Route index element={<DashboardHome />} />
+                <Route path="user" index element={<UserProfile />} />
+                <Route path="profile" index element={<Profile />} />
               </Route>
             </Routes>
           </ConfigProvider>

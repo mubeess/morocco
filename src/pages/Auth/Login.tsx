@@ -33,6 +33,7 @@ export default function Login() {
             lastName: loggedIn.data.user.lastName,
             email: loggedIn.data.user.email,
             token: loggedIn.data.user.token,
+            role: loggedIn.data.user.role,
           })
         );
         navigate('/dashboard');

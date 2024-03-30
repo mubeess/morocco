@@ -6,6 +6,7 @@ import { InitialValuesProps } from '../../Forms/Register';
 import { AxiosResponse } from 'axios';
 interface ValuesWithPayment extends InitialValuesProps {
   payment: { status: string; amount: number };
+  _id: string;
 }
 interface Response extends AxiosResponse {
   data: { data: ValuesWithPayment[]; success: boolean };

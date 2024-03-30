@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import useGetAllTokens from './hooks/useGetAllTokens';
 import moment from 'moment';
 import useGenerateToken from './hooks/useGenerateToken';
+import { useNavigate } from 'react-router-dom';
 
 export default function DashboardHome() {
   const { data, loading } = useGetAllRegistration();
@@ -14,7 +15,7 @@ export default function DashboardHome() {
   const [revenue, setRevenue] = useState('');
   const [morocco, setMorocco] = useState('');
   const [nigeria, setNigeria] = useState('');
-
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [tokenModal, setTokenModal] = useState(false);
@@ -219,7 +220,13 @@ export default function DashboardHome() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Button
-                      onClick={() => console.log(record)}
+                      onClick={() =>
+                        navigate('/dashboard/user', {
+                          state: {
+                            id: record._id,
+                          },
+                        })
+                      }
                       className="h-[30px] items-center flex justify-center">
                       ...
                     </Button>
