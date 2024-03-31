@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux';
 
 const PrivateRoutes = () => {
   const user = useSelector((user: RootState) => user.user);
-  {
-    console.log(user, 'userrrrrsss');
-  }
+
   return user.user.token ? <DashboardLayout /> : <Navigate to="/login" />;
 };
 

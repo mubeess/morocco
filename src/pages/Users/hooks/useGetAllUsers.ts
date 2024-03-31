@@ -4,25 +4,26 @@ import useLoading from '../../../general_hooks/useLoading';
 import { httpClient } from '../../../utils/config';
 
 import { AxiosResponse } from 'axios';
-export type TokenType = {
-  creation_date: Date;
+interface User {
+  _id: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  reference: string;
-  used: boolean;
-  expire_date: Date;
-};
-interface Response extends AxiosResponse {
-  data: { data: TokenType[]; success: boolean };
+  role: string;
 }
-const useGetAllTokens = (role: string) => {
+interface Response extends AxiosResponse {
+  data: { data: User[]; success: boolean };
+}
+const useGetAllUsers = () => {
   const { loading, startLoading, stopLoading } = useLoading();
-  const [data, setData] = useState<TokenType[] | []>([]);
+  const [data, setData] = useState<User[] | []>([]);
   const [refresh, setRefresh] = useState(0);
-  const getTokens = async () => {
+
+  const getRecord = async () => {
     startLoading();
 
     try {
-      const response: Response = await httpClient.get(`/generate_code`);
+      const response: Response = await httpClient.get(`/all_users`);
       stopLoading();
 
       if (response.data.success) {
@@ -34,16 +35,14 @@ const useGetAllTokens = (role: string) => {
   };
 
   useEffect(() => {
-    if (role == 'super_admin') {
-      getTokens();
-    }
+    getRecord();
   }, [refresh]);
   return {
-    lloadingTokens: loading,
-    getTokens,
-    tokens: data,
+    loading,
+    getRecord,
+    data,
     setRefresh,
   };
 };
 
-export default useGetAllTokens;
+export default useGetAllUsers;

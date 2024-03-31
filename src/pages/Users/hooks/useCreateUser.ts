@@ -1,27 +1,29 @@
 import { message } from 'antd';
 import useLoading from '../../../general_hooks/useLoading';
 import { httpClient } from '../../../utils/config';
-export interface LoginBody {
+export interface User {
+  firstName: string;
+  lastName: string;
+  role: string;
   email: string;
   password: string;
 }
-
-const useLogin = () => {
+const useCreateUser = () => {
   const { loading, startLoading, stopLoading } = useLoading();
 
-  const login = async (bodyData: LoginBody) => {
+  const createUser = async (bodyData: User) => {
     startLoading();
 
     try {
-      const response = await httpClient.post(`/login`, bodyData, {
+      const response = await httpClient.post(`/signup`, bodyData, {
         headers: {
           Accept: 'application/json',
         },
       });
       stopLoading();
-     
+
       if (response.data.status) {
-        message.success('Logged in successfully');
+        message.success('Created successfully');
         return { data: response.data, status: true };
       } else {
         return { data: null, status: false };
@@ -34,9 +36,9 @@ const useLogin = () => {
   };
 
   return {
-    loading,
-    login,
+    creating: loading,
+    createUser,
   };
 };
 
-export default useLogin;
+export default useCreateUser;
