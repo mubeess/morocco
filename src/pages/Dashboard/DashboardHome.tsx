@@ -12,7 +12,7 @@ import { RootState } from '../../redux';
 
 export default function DashboardHome() {
   const user = useSelector((user: RootState) => user.user);
-  const { data, loading } = useGetAllRegistration(user.user.role);
+  const { data, loading } = useGetAllRegistration();
   const { tokens, lloadingTokens, setRefresh } = useGetAllTokens(
     user.user.role
   );
