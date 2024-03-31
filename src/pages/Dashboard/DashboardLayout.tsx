@@ -3,6 +3,7 @@ import DashbordIcon from './compopnents/DashbordIcon';
 import ProfileIcon from './compopnents/ProfileIcon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
+import UsersIcon from './compopnents/UsersIcon';
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -63,6 +64,31 @@ export default function DashboardLayout() {
             </h1>
           </div>
         </Link>
+
+        {user.user.role == 'super_admin' && (
+          <Link to="/dashboard/users">
+            <div
+              className={`w-full h-[40px] ${
+                location.pathname == '/dashboard/users'
+                  ? 'bg-lightGreen'
+                  : 'bg-transparent'
+              } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}>
+              <UsersIcon
+                color={
+                  location.pathname == '/dashboard/users' ? 'white' : '#808080'
+                }
+              />
+              <h1
+                className={`w-[80%]  ${
+                  location.pathname == '/dashboard/users'
+                    ? 'text-white'
+                    : 'text-[#808080]'
+                } text-[14px]  ml-3`}>
+                Users
+              </h1>
+            </div>
+          </Link>
+        )}
       </div>
 
       <div className="flex flex-col flex-1">

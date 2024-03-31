@@ -7,15 +7,21 @@ import useGetAllTokens from './hooks/useGetAllTokens';
 import moment from 'moment';
 import useGenerateToken from './hooks/useGenerateToken';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux';
 
 export default function DashboardHome() {
+  const user = useSelector((user: RootState) => user.user);
   const { data, loading } = useGetAllRegistration();
-  const { tokens, lloadingTokens, setRefresh } = useGetAllTokens();
+  const { tokens, lloadingTokens, setRefresh } = useGetAllTokens(
+    user.user.role
+  );
   const { generateToken, generating } = useGenerateToken();
   const [revenue, setRevenue] = useState('');
   const [morocco, setMorocco] = useState('');
   const [nigeria, setNigeria] = useState('');
   const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [tokenModal, setTokenModal] = useState(false);
@@ -60,68 +66,70 @@ export default function DashboardHome() {
       <h1 className="text-[24px] text-fontColor">
         NIGERIA-MOROCCO BUSINESS WEEK
       </h1>
-      <div className="flex flex-col  md:flex-row justify-between items-center w-full min-h-[100px] bg-white gap-4">
-        <div className="flex w-full md:w-auto flex-col gap-2  md:flex-row items-center md:gap-8">
-          {loading && <Skeleton className="w-1/2" loading active />}
-          {!loading && (
-            <>
-              <DashboardCard
-                value={data.length.toString()}
-                color="#009a48bf"
-                label="Total Registered Participant"
-              />
-              <DashboardCard
-                value2={morocco}
-                value={nigeria}
-                label="Nigeria"
-                label2="Morocco"
-                color="#c1272cb8"
-              />
-              <DashboardCard
-                value={`₦${revenue}`}
-                label="Revenue Generated"
-                color="#2121219e"
-              />
-            </>
-          )}
-        </div>
+      {user.user.role == 'super_admin' && (
+        <div className="flex flex-col  md:flex-row justify-between items-center w-full min-h-[100px] bg-white gap-4">
+          <div className="flex w-full md:w-auto flex-col gap-2  md:flex-row items-center md:gap-8">
+            {loading && <Skeleton className="w-1/2" loading active />}
+            {!loading && (
+              <>
+                <DashboardCard
+                  value={data.length.toString()}
+                  color="#009a48bf"
+                  label="Total Registered Participant"
+                />
+                <DashboardCard
+                  value2={morocco}
+                  value={nigeria}
+                  label="Nigeria"
+                  label2="Morocco"
+                  color="#c1272cb8"
+                />
+                <DashboardCard
+                  value={`₦${revenue}`}
+                  label="Revenue Generated"
+                  color="#2121219e"
+                />
+              </>
+            )}
+          </div>
 
-        <div className="flex-1 h-[290px] w-full md:w-auto bg-silver p-3 pt-6">
-          {lloadingTokens && <Skeleton className="w-1/2" loading active />}
-          {!lloadingTokens && (
-            <h1 className="text-black font-bold text-center">Live codes</h1>
-          )}
-          {!lloadingTokens &&
-            tokens.slice(0, 3).map((token) => (
-              <div
-                key={token.reference}
-                className="flex justify-between items-center mt-[30px] w-full">
-                <h1 className="font-bold text-[12px]">
-                  {token.reference.split('-')[1]}
-                </h1>
-                <p className="text-fontColor text-[12px]">
-                  {token.used ? 'Used' : 'Not-Used'}
-                </p>
-                <p className="text-fontColor text-[12px]">
-                  {moment(token.expire_date).isBefore(moment())
-                    ? 'Expired'
-                    : 'Not Expired'}
-                </p>
-              </div>
-            ))}
+          <div className="flex-1 h-[290px] w-full md:w-auto bg-silver p-3 pt-6">
+            {lloadingTokens && <Skeleton className="w-1/2" loading active />}
+            {!lloadingTokens && (
+              <h1 className="text-black font-bold text-center">Live codes</h1>
+            )}
+            {!lloadingTokens &&
+              tokens.slice(0, 3).map((token) => (
+                <div
+                  key={token.reference}
+                  className="flex justify-between items-center mt-[30px] w-full">
+                  <h1 className="font-bold text-[12px]">
+                    {token.reference.split('-')[1]}
+                  </h1>
+                  <p className="text-fontColor text-[12px]">
+                    {token.used ? 'Used' : 'Not-Used'}
+                  </p>
+                  <p className="text-fontColor text-[12px]">
+                    {moment(token.expire_date).isBefore(moment())
+                      ? 'Expired'
+                      : 'Not Expired'}
+                  </p>
+                </div>
+              ))}
 
-          <div className="flex items-center mt-[40px] mb-3 justify-end">
-            <Button
-              onClick={showModal}
-              className="bg-lightGreen text-white h-[32px]">
-              Generate New Code
-            </Button>
-            <Button onClick={showTokenModal} className="ml-3">
-              <span className="font-bold">View Codes</span>
-            </Button>
+            <div className="flex items-center mt-[40px] mb-3 justify-end">
+              <Button
+                onClick={showModal}
+                className="bg-lightGreen text-white h-[32px]">
+                Generate New Code
+              </Button>
+              <Button onClick={showTokenModal} className="ml-3">
+                <span className="font-bold">View Codes</span>
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="flex w-full md:w-1/2 items-center justify-between">
         <h1 className="font-bold">All Participants</h1>
